@@ -1,3 +1,4 @@
+"use strict";
 // Handling Menu Events
 const menu = document.querySelector(".menu");
 const toggleMenu = document.querySelector(".toggle-menu");
@@ -23,9 +24,9 @@ const elProductsCards = document.querySelector(".products__cards");
 const dataProductsCart = [];
 
 elCartIcon.addEventListener("click", () => {
-  elCart.hidden === false ? (elCart.hidden = true) : (elCart.hidden = false);
+  elCart.hidden = !elCart.hidden;
   if (elCart.hidden === false) {
-    if (document.querySelector(".product")) {
+    if (dataProductsCart.length !== 0) {
       elCartEmpty.hidden = true;
       elItemsInCart.hidden = false;
     } else {
@@ -38,10 +39,7 @@ elCartIcon.addEventListener("click", () => {
 
 if (elProductsCards) {
   elProductsCards.addEventListener("click", (event) => {
-    if (
-      event.target.classList.contains("addCard") ||
-      event.target.parentNode.classList.contains("addCard")
-    ) {
+    if (event.target.closest(".addCard")) {
       let currElement = event.target;
       while (!currElement.classList.contains("card")) {
         currElement = currElement.parentElement;
@@ -65,8 +63,8 @@ if (elProductsCards) {
         dataProductsCart.push(product);
         elCartTotal.textContent = dataProductsCart.length;
       } else {
-        if (dataProductsCart.find((item) => item.name == name)) {
-          let prodFound = dataProductsCart.find((item) => item.name == name);
+        if (dataProductsCart.find((item) => item.name === name)) {
+          let prodFound = dataProductsCart.find((item) => item.name === name);
           prodFound.sum++;
           prodFound.total = (prodFound.sum * prodFound.price).toFixed(2);
         } else {
