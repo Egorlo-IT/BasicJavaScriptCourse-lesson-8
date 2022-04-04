@@ -5,7 +5,7 @@ const toggleMenu = document.querySelector(".toggle-menu");
 const closeMenu = document.querySelector(".cross-icon");
 
 toggleMenu.addEventListener("click", () => {
-  menu.hidden === false ? (menu.hidden = true) : (menu.hidden = false);
+  menu.hidden = !menu.hidden;
 });
 closeMenu.addEventListener("click", () => {
   menu.hidden = true;
